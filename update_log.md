@@ -1,4 +1,12 @@
-* 16/12/21 SpannableStringUtils撒花完结
+* 17/02/05 完善FragmentUtils中
+* 17/02/04 完善FragmentUtils中
+* 17/02/03 完善FragmentUtils中
+* 17/02/02 完善FragmentUtils中
+* 17/02/01 完善FragmentUtils中
+* 17/01/24 发布版本1.3.6
+* 17/01/16 LogUtils新增打印类名函数名及所在行
+* 17/12/26 新增阴历相关工具类
+* 17/12/21 SpannableStringUtils撒花完结
 * 16/12/19 SpannableStringUtils完善中
 * 16/12/18 SpannableStringUtils采用构造者模式
 * 16/12/17 完善SpannableStringUtils中

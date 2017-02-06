@@ -113,7 +113,7 @@ init
 
 > - **About Device→[DeviceUtils.java][device.java]→[Demo][device.demo]**
  ```
-isDeviceRoot
+isDeviceRooted
 getSDKVersion
 getAndroidID
 getMacAddress
@@ -565,7 +565,7 @@ getEntries
 
 Gradle:
 ``` groovy
-compile 'com.blankj:utilcode:1.3.5'
+compile 'com.blankj:utilcode:1.3.6'
 ```
 
 ## How to use

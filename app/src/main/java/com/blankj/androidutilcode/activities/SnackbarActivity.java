@@ -38,12 +38,14 @@ public class SnackbarActivity extends Activity
 
     @Override
     public void onClick(View view) {
+        final View snackBarRootView = findViewById(android.R.id.content);
+
         switch (view.getId()) {
             case R.id.btn_short_snackbar:
-                SnackbarUtils.showShortSnackbar(getWindow().getDecorView(), "short snackbar", Color.WHITE, Color.BLUE);
+                SnackbarUtils.showShortSnackbar(snackBarRootView, "short snackbar", Color.WHITE, Color.BLUE);
                 break;
             case R.id.btn_short_snackbar_with_action:
-                SnackbarUtils.showShortSnackbar(getWindow().getDecorView(), "short snackbar", Color.WHITE, Color.BLUE,
+                SnackbarUtils.showShortSnackbar(snackBarRootView, "short snackbar", Color.WHITE, Color.BLUE,
                         "Short", Color.YELLOW, new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -52,10 +54,10 @@ public class SnackbarActivity extends Activity
                         });
                 break;
             case R.id.btn_long_snackbar:
-                SnackbarUtils.showLongSnackbar(getWindow().getDecorView(), "long snackbar", Color.WHITE, Color.GREEN);
+                SnackbarUtils.showLongSnackbar(snackBarRootView, "long snackbar", Color.WHITE, Color.GREEN);
                 break;
             case R.id.btn_long_snackbar_with_action:
-                SnackbarUtils.showLongSnackbar(getWindow().getDecorView(), "long snackbar", Color.WHITE, Color.GREEN,
+                SnackbarUtils.showLongSnackbar(snackBarRootView, "long snackbar", Color.WHITE, Color.GREEN,
                         "Long", Color.YELLOW, new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -64,10 +66,10 @@ public class SnackbarActivity extends Activity
                         });
                 break;
             case R.id.btn_indefinite_snackbar:
-                SnackbarUtils.showIndefiniteSnackbar(getWindow().getDecorView(), "Indefinite snackbar", 5000, Color.WHITE, Color.RED);
+                SnackbarUtils.showIndefiniteSnackbar(snackBarRootView, "Indefinite snackbar", Color.WHITE, Color.RED);
                 break;
             case R.id.btn_indefinite_snackbar_with_action:
-                SnackbarUtils.showIndefiniteSnackbar(getWindow().getDecorView(), "Indefinite snackbar", 5000, Color.WHITE, Color.RED,
+                SnackbarUtils.showIndefiniteSnackbar(snackBarRootView, "Indefinite snackbar", Color.WHITE, Color.RED,
                         "Indefinite", Color.YELLOW, new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -76,11 +78,11 @@ public class SnackbarActivity extends Activity
                         });
                 break;
             case R.id.btn_add_view:
-                SnackbarUtils.showShortSnackbar(getWindow().getDecorView(), "short snackbar", Color.WHITE, Color.BLUE);
+                SnackbarUtils.showShortSnackbar(snackBarRootView, "short snackbar", Color.WHITE, Color.BLUE);
                 SnackbarUtils.addView(R.layout.snackbar_add, 0);
                 break;
             case R.id.btn_add_view_with_action:
-                SnackbarUtils.showLongSnackbar(getWindow().getDecorView(), "short snackbar", Color.WHITE, Color.BLUE,
+                SnackbarUtils.showLongSnackbar(snackBarRootView, "short snackbar", Color.WHITE, Color.BLUE,
                         "Short", Color.YELLOW, new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {

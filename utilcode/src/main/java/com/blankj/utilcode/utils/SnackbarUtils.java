@@ -6,9 +6,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import com.blankj.utilcode.R;
 
 import java.lang.ref.WeakReference;
 
@@ -91,12 +88,11 @@ public class SnackbarUtils {
      *
      * @param parent    父视图(CoordinatorLayout或者DecorView)
      * @param text      文本
-     * @param duration  自定义时长
      * @param textColor 文本颜色
      * @param bgColor   背景色
      */
-    public static void showIndefiniteSnackbar(View parent, CharSequence text, int duration, @ColorInt int textColor, @ColorInt int bgColor) {
-        showSnackbar(parent, text, duration, textColor, bgColor, null, -1, null);
+    public static void showIndefiniteSnackbar(View parent, CharSequence text, @ColorInt int textColor, @ColorInt int bgColor) {
+        showSnackbar(parent, text, Snackbar.LENGTH_INDEFINITE, textColor, bgColor, null, -1, null);
     }
 
     /**
@@ -104,16 +100,15 @@ public class SnackbarUtils {
      *
      * @param parent          父视图(CoordinatorLayout或者DecorView)
      * @param text            文本
-     * @param duration        自定义时长
      * @param textColor       文本颜色
      * @param bgColor         背景色
      * @param actionText      事件文本
      * @param actionTextColor 事件文本颜色
      * @param listener        监听器
      */
-    public static void showIndefiniteSnackbar(View parent, CharSequence text, int duration, @ColorInt int textColor, @ColorInt int bgColor,
+    public static void showIndefiniteSnackbar(View parent, CharSequence text, @ColorInt int textColor, @ColorInt int bgColor,
                                               CharSequence actionText, int actionTextColor, View.OnClickListener listener) {
-        showSnackbar(parent, text, duration, textColor, bgColor,
+        showSnackbar(parent, text, Snackbar.LENGTH_INDEFINITE, textColor, bgColor,
                 actionText, actionTextColor, listener);
     }
 
@@ -129,25 +124,21 @@ public class SnackbarUtils {
      * @param actionTextColor 事件文本颜色
      * @param listener        监听器
      */
-    private static void showSnackbar(View parent, CharSequence text, int duration, @ColorInt int textColor, @ColorInt int bgColor,
-                                     CharSequence actionText, int actionTextColor, View.OnClickListener listener) {
-        switch (duration) {
-            default:
-            case Snackbar.LENGTH_SHORT:
-            case Snackbar.LENGTH_LONG:
-                snackbarWeakReference = new WeakReference<>(Snackbar.make(parent, text, duration));
-                break;
-            case Snackbar.LENGTH_INDEFINITE:
-                snackbarWeakReference = new WeakReference<>(Snackbar.make(parent, text, Snackbar.LENGTH_INDEFINITE).setDuration(duration));
-        }
-        View view = snackbarWeakReference.get().getView();
-        ((TextView) view.findViewById(R.id.snackbar_text)).setTextColor(textColor);
+    private static void showSnackbar(View parent, CharSequence text,
+                                     int duration,
+                                     @ColorInt int textColor, @ColorInt int bgColor,
+                                     CharSequence actionText, int actionTextColor,
+                                     View.OnClickListener listener) {
+        snackbarWeakReference = new WeakReference<>(Snackbar.make(parent, text, duration));
+        Snackbar snackbar = snackbarWeakReference.get();
+        View view = snackbar.getView();
+        snackbar.setActionTextColor(textColor);
         view.setBackgroundColor(bgColor);
         if (actionText != null && actionText.length() > 0 && listener != null) {
-            snackbarWeakReference.get().setActionTextColor(actionTextColor);
-            snackbarWeakReference.get().setAction(actionText, listener);
+            snackbar.setActionTextColor(actionTextColor);
+            snackbar.setAction(actionText, listener);
         }
-        snackbarWeakReference.get().show();
+        snackbar.show();
     }
 
     /**

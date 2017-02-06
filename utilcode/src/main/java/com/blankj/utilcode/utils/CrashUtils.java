@@ -28,10 +28,11 @@ public class CrashUtils
     private volatile static CrashUtils mInstance;
 
     private UncaughtExceptionHandler mHandler;
-    private boolean                  mInitialized;
-    private String                   crashDir;
-    private String                   versionName;
-    private int                      versionCode;
+
+    private boolean mInitialized;
+    private String  crashDir;
+    private String  versionName;
+    private int     versionCode;
 
     private CrashUtils() {
     }
@@ -39,6 +40,7 @@ public class CrashUtils
     /**
      * 获取单例
      * <p>在Application中初始化{@code CrashUtils.getInstance().init(this);}</p>
+     * <p>需添加权限 {@code <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>}</p>
      *
      * @return 单例
      */
@@ -61,9 +63,13 @@ public class CrashUtils
     public boolean init() {
         if (mInitialized) return true;
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-            crashDir = Utils.getContext().getExternalCacheDir().getPath() + File.separator + "crash" + File.separator;
+            File baseCache = Utils.getContext().getExternalCacheDir();
+            if (baseCache == null) return false;
+            crashDir = baseCache.getPath() + File.separator + "crash" + File.separator;
         } else {
-            crashDir = Utils.getContext().getCacheDir().getPath() + File.separator + "crash" + File.separator;
+            File baseCache = Utils.getContext().getCacheDir();
+            if (baseCache == null) return false;
+            crashDir = baseCache.getPath() + File.separator + "crash" + File.separator;
         }
         try {
             PackageInfo pi = Utils.getContext().getPackageManager().getPackageInfo(Utils.getContext().getPackageName(), 0);
